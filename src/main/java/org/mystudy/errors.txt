@@ -1,0 +1,49 @@
+[Exception msg1]
+Exception in thread "main" org.apache.spark.SparkException: Task not serializable
+	at org.apache.spark.util.ClosureCleaner$.ensureSerializable(ClosureCleaner.scala:304)
+	at org.apache.spark.util.ClosureCleaner$.org$apache$spark$util$ClosureCleaner$$clean(ClosureCleaner.scala:294)
+	at org.apache.spark.util.ClosureCleaner$.clean(ClosureCleaner.scala:122)
+	at org.apache.spark.SparkContext.clean(SparkContext.scala:2055)
+	at org.apache.spark.rdd.RDD$$anonfun$filter$1.apply(RDD.scala:341)
+	at org.apache.spark.rdd.RDD$$anonfun$filter$1.apply(RDD.scala:340)
+	at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:150)
+	at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:111)
+	at org.apache.spark.rdd.RDD.withScope(RDD.scala:316)
+	at org.apache.spark.rdd.RDD.filter(RDD.scala:340)
+	at org.apache.spark.api.java.JavaRDD.filter(JavaRDD.scala:78)
+	at org.mystudy.Ch3_example.proc1(Ch3_example.java:84)
+	at org.mystudy.Ch3_example.main(Ch3_example.java:25)
+Caused by: java.io.NotSerializableException: org.mystudy.Ch3_example
+Serialization stack:
+	- object not serializable (class: org.mystudy.Ch3_example, value: org.mystudy.Ch3_example@2bfb583b)
+	- field (class: org.mystudy.Ch3_example$1, name: this$0, type: class org.mystudy.Ch3_example)
+	- object (class org.mystudy.Ch3_example$1, org.mystudy.Ch3_example$1@4462efe1)
+	- field (class: org.apache.spark.api.java.JavaRDD$$anonfun$filter$1, name: f$1, type: interface org.apache.spark.api.java.function.Function)
+	- object (class org.apache.spark.api.java.JavaRDD$$anonfun$filter$1, <function1>)
+	at org.apache.spark.serializer.SerializationDebugger$.improveException(SerializationDebugger.scala:40)
+	at org.apache.spark.serializer.JavaSerializationStream.writeObject(JavaSerializer.scala:47)
+	at org.apache.spark.serializer.JavaSerializerInstance.serialize(JavaSerializer.scala:101)
+	at org.apache.spark.util.ClosureCleaner$.ensureSerializable(ClosureCleaner.scala:301)
+	... 12 more
+
+[Exception msg2]
+Exception in thread "main" java.io.NotSerializableException: org.apache.spark.api.java.JavaSparkContext
+Serialization stack:
+	- object not serializable (class: org.apache.spark.api.java.JavaSparkContext, value: org.apache.spark.api.java.JavaSparkContext@625d9132)
+	- field (class: org.mystudy.Ch3_example, name: sc, type: class org.apache.spark.api.java.JavaSparkContext)
+	- object (class org.mystudy.Ch3_example, org.mystudy.Ch3_example@1e7ab390)
+	- field (class: org.mystudy.Ch3_example$1AvgCount, name: this$0, type: class org.mystudy.Ch3_example)
+	- object (class org.mystudy.Ch3_example$1AvgCount, org.mystudy.Ch3_example$1AvgCount@18d910b3)
+	at org.apache.spark.serializer.SerializationDebugger$.improveException(SerializationDebugger.scala:40)
+	at org.apache.spark.serializer.JavaSerializationStream.writeObject(JavaSerializer.scala:47)
+	at org.apache.spark.serializer.JavaSerializerInstance.serialize(JavaSerializer.scala:101)
+	at org.apache.spark.util.Utils$.clone(Utils.scala:1422)
+	at org.apache.spark.rdd.RDD$$anonfun$aggregate$1.apply(RDD.scala:1095)
+	at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:150)
+	at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:111)
+	at org.apache.spark.rdd.RDD.withScope(RDD.scala:316)
+	at org.apache.spark.rdd.RDD.aggregate(RDD.scala:1093)
+	at org.apache.spark.api.java.JavaRDDLike$class.aggregate(JavaRDDLike.scala:411)
+	at org.apache.spark.api.java.AbstractJavaRDDLike.aggregate(JavaRDDLike.scala:46)
+	at org.mystudy.Ch3_example.proc2(Ch3_example.java:184)
+	at org.mystudy.Ch3_example.main(Ch3_example.java:26)
